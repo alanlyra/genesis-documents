@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const PreProcessingService = require('../../services/PreProcessingService');
 
 const DocumentSchema = new Schema({
     name: String,
@@ -10,6 +11,20 @@ const DocumentSchema = new Schema({
         text: String,
         sentences: [Schema.Types.Mixed]
     }
+},{
+    toJSON:{virtuals: true},
+    toObject:{virtuals: true}
 });
 
-module.exports = DocumentSchema;
+// Relação entre usuário e role pelo mongoose
+DocumentSchema.virtual('projects', {
+    ref: 'Document',
+    localField: '_id',
+    foreignField: 'bibliometrics.documents'
+})
+
+DocumentSchema.methods.preProcessing = PreProcessingService.preProcessing;
+
+const Document = mongoose.model('Document', DocumentSchema, 'Documents')
+
+module.exports = Document

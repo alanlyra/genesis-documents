@@ -22,7 +22,10 @@ const ProjectsSchema = new Schema({
     bibliometrics: {
         method: String,
         keywords: [String],
-        documents: [DocumentSchema]
+        documents: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Document'
+        }]
     },
     roadmap: [RoadmapSchema],
     scenarios: [ScenariosSchema],
@@ -30,6 +33,5 @@ const ProjectsSchema = new Schema({
 });
 
 ProjectsSchema.statics.addDocument = ProjectService.addDocument;
-ProjectsSchema.statics.preProcessing = PreProcessingService.preProcessing;
 
 module.exports = mongoose.model('Projects', ProjectsSchema, collectionMapping);
