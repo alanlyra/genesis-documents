@@ -8,7 +8,9 @@ router.post('/upload', uploadPDF, async (req, res) => {
 
     try {
         const project = await Projects.addDocument(req)
-        res.send("Arquivo enviado com sucesso!")
+        res.send("Arquivo(s) enviado(s) com sucesso!")
+        const preprocessing = await Projects.preProcessing(req)
+        res.send("Documentos pré-processados com sucesso!")
     } catch (e) {
         console.log(e)
         res.sendStatus(400)

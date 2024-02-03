@@ -8,6 +8,7 @@ const RoadmapSchema = require('./subSchemas/RoadmapSchema.js.js');
 const ScenariosSchema = require('./subSchemas/ScenariosSchema.js');
 const ReportSchema = require('./subSchemas/ReportSchema.js');
 const ProjectService = require('../services/ProjectService.js');
+const PreProcessingService = require('../services/PreProcessingService.js');
 const { collection } = require('./Projects.js');
 
 
@@ -28,6 +29,7 @@ const ProjectsSchema = new Schema({
     report: [ReportSchema]
 });
 
-ProjectsSchema.statics.addDocument = ProjectService.addDocument
+ProjectsSchema.statics.addDocument = ProjectService.addDocument;
+ProjectsSchema.statics.preProcessing = PreProcessingService.preProcessing;
 
 module.exports = mongoose.model('Projects', ProjectsSchema, collectionMapping);
