@@ -7,7 +7,9 @@ const DocumentSchema = require('./subSchemas/DocumentSchema.js');
 const RoadmapSchema = require('./subSchemas/RoadmapSchema.js.js');
 const ScenariosSchema = require('./subSchemas/ScenariosSchema.js');
 const ReportSchema = require('./subSchemas/ReportSchema.js');
-const { collection } = require('./Empresas.js');
+const ProjectService = require('../services/ProjectService.js');
+const { collection } = require('./Projects.js');
+
 
 const ProjectsSchema = new Schema({
     name: String,
@@ -25,5 +27,7 @@ const ProjectsSchema = new Schema({
     scenarios: [ScenariosSchema],
     report: [ReportSchema]
 });
+
+ProjectsSchema.statics.addDocument = ProjectService.addDocument
 
 module.exports = mongoose.model('Projects', ProjectsSchema, collectionMapping);
