@@ -4,6 +4,11 @@ const Document = require('../models/subSchemas/DocumentSchema');
 
 
 async function addDocument(req) {
+    console.log(req.body)
+    if (!req.body._id || req.body._id.length !== 24) {
+        throw new Error('Invalid _id');
+    }
+    
     const project = await this.findById(req.body._id);
 
     // Cria um novo ObjectId
