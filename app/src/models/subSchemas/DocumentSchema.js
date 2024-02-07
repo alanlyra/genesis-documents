@@ -4,9 +4,17 @@ const PreProcessingService = require('../../services/PreProcessingService');
 
 const DocumentSchema = new Schema({
     name: String,
+    title: String,
     description: String,
     uploadDate: Date,
     URL: String,
+    author: String,
+    doi: String,
+    publisher: String,
+    subject: String,
+    issn: String,
+    creator: String,
+    producer: String,
     preprocessing: {
         text: String,
         sentences: [Schema.Types.Mixed]

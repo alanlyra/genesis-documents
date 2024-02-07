@@ -12,10 +12,10 @@ router.post('/upload', uploadPDF, async (req, res) => {
 
         const project = await Projects.findById(req.body._id).populate('bibliometrics.documents');
         if (!project) {
-            return res.status(404).send({ message: 'Project not found' });
-        }
-    
-        res.send(project.bibliometrics.documents);
+        return res.status(404).send({ message: 'Project not found' });
+    }
+
+    res.send(project.bibliometrics.documents);
     } catch (e) {
         console.log(e)
         res.sendStatus(400)

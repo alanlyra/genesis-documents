@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const Document = require('../models/subSchemas/DocumentSchema');
-
+const { extrairMetadadosDoPDF } = require('../utils/Metadata');
 
 async function addDocument(req) {
     console.log(req.body)
@@ -14,12 +14,23 @@ async function addDocument(req) {
     // Cria um novo ObjectId
     const _id = new mongoose.Types.ObjectId();
 
+    const metadata = await extrairMetadadosDoPDF(req.file.path);
+    console.log(metadata)
+
     const newDocument = new Document({
         _id,
         name: req.file.filename,
-        description: "2 blablabla qualquer coisa",
+        title: metadata.title,
+        description: metadata.description,
         uploadDate: new Date(),
         URL: req.file.filename,
+        author: metadata.author,
+        doi: metadata.identifier,
+        publisher: metadata.publisher,
+        subject: metadata.subject,
+        issn: metadata.issn,
+        creator: metadata.creator,
+        producer: metadata.producer
     });
 
     try {
