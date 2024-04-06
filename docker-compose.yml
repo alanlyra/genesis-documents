@@ -8,6 +8,8 @@ services:
     volumes: 
       - ./app:/home/node/app
       - ${MODELS_PATH}:/home/node/app/src/models
+      - ${FILES_PATH}:/home/node/app/files/pdfDocs
+      - ${MANIFEST_PATH}:/home/node/app/files/manifests
     env_file:
       - .env
     stdin_open: true

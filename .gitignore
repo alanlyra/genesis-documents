@@ -9,4 +9,5 @@
 **/node-start.sh
 **/normalize.min.cssZone.Identifier
 **/.pdf
+/app/files/pdfDocs
 /app/pdfDocs
